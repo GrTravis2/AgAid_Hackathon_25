@@ -4,12 +4,13 @@ from PIL import Image
 import os
 
 # image directories
-ORIGINAL_FP_PREFIX: str = "/Users/gavintravis/Downloads/images_512/original/"
-# ORIGINAL_FP_PREFIX: str = "/weka/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
-RESIDUE_FP_PREFIX: str = "/Users/gavintravis/Downloads/images_512/label/residue_background/"
-# RESIDUE_FP_PREFIX: str = "/weka/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/residue_background/"
+#ORIGINAL_FP_PREFIX: str = "/Users/gavintravis/Downloads/images_512/original/"
+ORIGINAL_FP_PREFIX: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
+#RESIDUE_FP_PREFIX: str = "/Users/gavintravis/Downloads/images_512/label/residue_background/"
+RESIDUE_FP_PREFIX: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/label/residue_background/"
 
 # "/Users/gavintravis/Downloads/images_512/original/Zak-W-winterBarley_1m_20220401/IMG_0939.jpg_part03.jpg"
+# /scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/
 
 """
     example filename by location type:
@@ -53,7 +54,7 @@ class original_image:
         
         self.data = self.data.join(residue_df)
 
-        print(self.data)
+        #print(self.data)
 
     def map_location(self, location: str) -> int:
         location_value: int = -1
@@ -142,16 +143,16 @@ def test() -> bool:
 def run() -> None:
     root_dir: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
     #root_dir: str = "/Users/gavintravis/Downloads/images_512/original/"
-    csv_filepath: str = "/scratch/project/hackathon/team13/csv/data.csv"
+    csv_filepath: str = "/scratch/project/hackathon/team13/csv/smaller_data.csv"
     file_count: int = 0
 
     for folder in os.listdir(root_dir):
             if folder == ".DS_Store": continue
             
-            for image in os.listdir(fp := os.path.join(root_dir, folder + "/")):
-                
+            for index, image in enumerate(os.listdir(fp := os.path.join(root_dir, folder + "/"))):
+                if index > 4: break #shrink data set
                 new_image_table = original_image(os.path.join(fp, image))
                 new_image_table.data.to_csv(csv_filepath, mode="a", index=False)
                 file_count += 1
-                print(1)
+                print(file_count)
                 del new_image_table
