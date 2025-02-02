@@ -140,8 +140,9 @@ def test() -> bool:
     return True
 
 def run() -> None:
-    root_dir: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
-    #root_dir: str = "/Users/gavintravis/Downloads/images_512/original/"
+    #root_dir: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
+    root_dir: str = "/Users/gavintravis/Downloads/images_512/original/"
+    csv_filepath: str = "/scratch/project/hackathon/team13/csv/data.csv"
     file_count: int = 0
 
     for folder in os.listdir(root_dir):
@@ -150,7 +151,7 @@ def run() -> None:
             for image in os.listdir(fp := os.path.join(root_dir, folder + "/")):
                 
                 new_image_table = original_image(os.path.join(fp, image))
-                new_image_table.data.to_csv("data.csv", mode="a", index=False)
+                new_image_table.data.to_csv(csv_filepath, mode="a", index=False)
                 file_count += 1
                 print(1)
                 del new_image_table
