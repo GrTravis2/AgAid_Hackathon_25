@@ -140,8 +140,8 @@ def test() -> bool:
     return True
 
 def run() -> None:
-    #root_dir: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
-    root_dir: str = "/Users/gavintravis/Downloads/images_512/original/"
+    root_dir: str = "/scratch/project/hackathon/data/CropResiduePredictionChallenge/images_512/original/"
+    #root_dir: str = "/Users/gavintravis/Downloads/images_512/original/"
     csv_filepath: str = "/scratch/project/hackathon/team13/csv/data.csv"
     file_count: int = 0
 
